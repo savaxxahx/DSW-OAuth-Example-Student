@@ -26,6 +26,17 @@
     <div id="content">
 
   {% block content %}{% endblock %}</div>
+    
+{% with messages = get.flashed_messages() %}
+   {% if messages %}
+    <ul>
+    {% for message in messages %} 
+       <li>{{ message }}</li>
+		{% endfor %}
+    </ul>
+   {% end if%}
+{% end with %}
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
