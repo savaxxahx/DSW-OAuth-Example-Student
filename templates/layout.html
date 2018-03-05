@@ -27,7 +27,7 @@
 
   {% block content %}{% endblock %}</div>
     
-{% with messages = get.flashed_messages() %}
+{% with messages = get_flashed_messages() %}
    {% if messages %}
     <ul>
     {% for message in messages %} 
