@@ -56,7 +56,7 @@ def authorized():
     resp = github.authorized_response()
     if resp is None:
         session.clear()
-        message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)      
+        flash('Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args))      
     else:
         try:
             #save user data and set log in message
@@ -67,7 +67,7 @@ def authorized():
             #clear the session and give error message
             session.clear()
             flash("You were not logged in try again")
-    return render_template('message.html', message=message)
+    return render_template('message.html')
 
 
 @app.route('/page1')
