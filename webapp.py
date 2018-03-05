@@ -61,11 +61,11 @@ def authorized():
             #save user data and set log in message
             session['github_token']=(resp['access_token'],'')
             session['user_data']=github.get('user').data
-            flash("You have successfully logged in as")
+            flash("You have successfully logged in as ")
         except:
             #clear the session and give error message
             session.clear()
-            flash(“You were not logged in try again”)
+            flash("You were not logged in try again")
     return render_template('message.html', message=message)
 
 
