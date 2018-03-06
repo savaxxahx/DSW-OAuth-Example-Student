@@ -72,7 +72,7 @@ def authorized():
             #clear the session and give error message
             session.clear()
             flash("You were not logged in try again")
-    return render_template('home.html')
+    return render_template('home.html', Logged= login)
 
 
 @app.route('/page1')
