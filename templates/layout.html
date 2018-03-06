@@ -23,30 +23,27 @@
 	  
     {% include 'navbar.html' %}
 
-{% if Logged %}
-<div class="alert alert-success">
-  <strong>Success!</strong> You were logged in.
-</div>
-{% endif %}
+
     <div id="content">
 
   {% block content %}{% endblock %}</div>
 
 {% with messages = get_flashed_messages() %}
-   {% if messages %}
-    <ul>
-    {% for message in messages %} 
-       <li>{{ message }}</li>
-		{% endfor %}
-    </ul>
-   {% endif%}
+	{% if messages %}
+    	<ul>
+	{% for message in messages %} 
+		<li>
+			{% if Logged %}
+				<div class="alert alert-success">
+  				<strong>Success!</strong> {{ message }}
+				</div>
+			{% endif %}
+`		</li>
+	{% endfor %}
+	</ul>
+	{% endif%}
 {% endwith %}
 
-{% if Logged %}
-<div class="alert alert-success">
-  <strong>Success!</strong> You were logged in.
-</div>
-{% endif %}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
