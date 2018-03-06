@@ -20,9 +20,14 @@
 
   </head>
   <body>
+	  
     {% include 'navbar.html' %}
 
-
+{% if Logged %}
+<div class="alert alert-success">
+  <strong>Success!</strong> You were logged in.
+</div>
+{% endif %}
     <div id="content">
 
   {% block content %}{% endblock %}</div>
