@@ -29,6 +29,7 @@ github = oauth.remote_app(
     access_token_method='POST',
     access_token_url='https://github.com/login/oauth/access_token',  
     authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
+    
 )
 
 # context processors run before template are rendered and add variable(s) to the templates context 
@@ -51,19 +52,23 @@ def logout():
     session.clear()
     return render_template('message.html', message='You were logged out')
 
+login = False
 @app.route('/login/authorized')#the route should match the callback URL registered with the OAuth provider
 def authorized():
     resp = github.authorized_response()
     if resp is None:
+        login = False
         session.clear()
         flash("'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)")      
     else:
         try:
+            login = True
             #save user data and set log in message
             session['github_token']=(resp['access_token'],'')
             session['user_data']=github.get('user').data
             flash("You have successfully logged in as " + session['user_data']['login'])  
         except:
+            login = False
             #clear the session and give error message
             session.clear()
             flash("You were not logged in try again")
